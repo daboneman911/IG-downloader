@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    /* Stop iOS from inflating text in landscape. */
+    -webkit-text-size-adjust: 100%;
+    background: #7c3aed;
+  }
+  @media (prefers-color-scheme: dark) {
+    html {
+      background: #1b1030;
+    }
+  }
+  body {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+    /* Kill rubber-band bounce revealing a blank strip behind the fixed bottom bar. */
+    overscroll-behavior-y: none;
+  }
+  button {
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply flex min-h-14 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 via-violet-600 to-pink-500 px-4 text-base font-bold text-white shadow-lg shadow-violet-900/30 transition active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100;
+  }
+  .btn-secondary {
+    @apply flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white/15 px-3 text-sm font-semibold text-white ring-1 ring-white/20 transition active:bg-white/25;
+  }
+}
+
+/* Bottom-sheet slide-up for the help <dialog>. */
+dialog.sheet[open] {
+  animation: sheet-up 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.sheet[open] {
+    animation: none;
+  }
+}
